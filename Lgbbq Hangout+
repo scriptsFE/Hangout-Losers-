@@ -126,7 +126,7 @@
 
     ShowHelp()
 
-    local Moderators = {"Kaitlyn", "darkzolani", "un_kas", "CodeRED_Lua", "ILuftye", "370120", "37x_o", "nicopuppyboy", "strixOxpl", "26q_w", "RadBooz", "o7ry", "TheDivineRoses"} -- 🥀💔🧑‍🦽👨‍🦯☠️🤡
+    local Moderators = {"Shxrepxx", "zysp4r_", "Skepex", "Kaitlyn", "darkzolani", "un_kas", "CodeRED_Lua", "ILuftye", "370120", "37x_o", "nicopuppyboy", "strixOxpl", "26q_w", "RadBooz", "o7ry", "TheDivineRoses"} -- 💔🥀👨‍🦯🧑‍🦽☠️🤡
     local function CheckPlayer(plr)
         for _, name in ipairs(Moderators) do
             if plr.Name == name then AddLine("[!] MODERATOR DETECTED: " .. plr.Name, Color3.fromRGB(255, 50, 50)) end
@@ -164,7 +164,7 @@
                 if text then
                     local remote = _RS:FindFirstChild("UpdateNameTag")
                     if remote then remote:FireServer("", text, Color3.new(0,0,0), nil, "Undecided") AddLine("Pronouns updated to " .. text, purple) end
-                else AddLine("Error: Use quotation marks.", Color3.fromRGB(255, 100, 100)) end
+                else AddLine("Error Use quotation marks", Color3.fromRGB(255, 100, 100)) end
 
             elseif cmd == "run crash" or cmd == "crash on" then
                 if crashActive then return end
@@ -188,16 +188,49 @@
                     if remote then
                         crashActive = true
                         totalFired = 0
-                        AddLine("REMOTE INJECT HOLD UP", Color3.fromRGB(255, 50, 50))
                         
+                        local blockArt = {
+                            "▒▒▒▒▒▒▒▒▒▒▒▄▄▄▄░▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒▒▒▒▒▒▄██████▒▒▒▒▒▄▄▄█▄▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒▒▒▒▄██▀░░▀██▄▒▒▒▒████████▄▒▒▒▒▒▒",
+                            "▒▒▒▒▒▒███░░░░░░██▒▒▒▒▒▒█▀▀▀▀▀██▄▄▒▒▒",
+                            "▒▒▒▒▒▄██▌░░░░░░░██▒▒▒▒▐▌▒▒▒▒▒▒▒▒▀█▄▒",
+                            "▒▒▒▒▒███░░▐█░█▌░██▒▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▀▌",
+                            "▒▒▒▒████░▐█▌░▐█▌██▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▐████░▐░░░░░▌██▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒████░░░▄█░░░██▒▒▐█▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒████░░░██░░██▌▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒████▌░▐█░░███▒▒▒█▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒▐████░░▌░███▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒▒▒████░░░███▒▒▒▒█▌▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▒▒██████▌░████▒▒▒██▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒▐████████████▒▒███▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "▒█████████████▄████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "██████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "██████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "█████████████████▀▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "█████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒",
+                            "████████████████▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒"
+                        }
+
+                        local artLabels = {}
+                        for _, lineText in ipairs(blockArt) do
+                            table.insert(artLabels, AddLine(lineText, Color3.fromRGB(255, 50, 50)))
+                        end
+
+                        task.wait(5)
+                        for _, label in ipairs(artLabels) do label:Destroy() end
+
                         local statusLabel = AddLine("BEGAN...", purple)
                         task.spawn(function()
                             while crashActive do
                                 local pingString = _Stats.Network.ServerStatsItem["Data Ping"]:GetValueString()
                                 local pingNum = pingString:match("%d+") or "0"
-                                statusLabel.Text = string.format("[STATS] Fired: %d | Ping: %s ms | Remote: %s", totalFired, pingNum, remote.Name)
+                                statusLabel.Text = string.format("[STATS] Fired %d | Ping %s ms | Remote %s", totalFired, pingNum, remote.Name)
                                 task.wait(0.05)
                             end
+                            statusLabel:Destroy()
                         end)
 
                         task.spawn(function()
@@ -286,4 +319,4 @@
         end
     end)
 end)()
-    
+
